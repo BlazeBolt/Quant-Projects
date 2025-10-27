@@ -82,7 +82,7 @@ def collect_stock_info():
         print(f"\n📈 Stock #{i+1} Information:")
         
         # Get stock symbol
-        symbol = input("  Enter stock symbol (e.g., AAPL): ").upper()
+        symbol = input("  Enter stock symbol: ").upper()
         symbols.append(symbol)
         
         # Get purchase price
@@ -157,19 +157,19 @@ def display_summary(symbols, purchase_prices, current_prices, share_counts, posi
     total_value, total_cost, total_gain_dollars, total_gain_percent = portfolio_totals
     
     # Display individual stock performance
-    print("\n" + "=" * 70)
-    print(f"{'STOCK PORTFOLIO SUMMARY':^70}")
-    print("=" * 70)
+    print("\n" + "=" * 80)
+    print(f"{'STOCK PORTFOLIO SUMMARY':^80}")
+    print("=" * 80)
     print(f"{'Symbol':<10}{'Shares':<10}{'Buy Price':<12}{'Current':<12}{'Value':<15}{'Gain/Loss':<15}{'%':<8}")
-    print("-" * 70)
+    print("-" * 80)
     
     for i in range(len(symbols)):
         print(f"{symbols[i]:<10}{share_counts[i]:<10}${purchase_prices[i]:<11.2f}${current_prices[i]:<11.2f}${position_values[i]:<14.2f}${dollar_gains[i]:<14.2f}{percent_gains[i]:<8.2f}%")
     
     # Display portfolio totals
-    print("-" * 70)
+    print("-" * 80)
     print(f"{'TOTAL':<10}{'':<10}{'':<12}{'':<12}${total_value:<14.2f}${total_gain_dollars:<14.2f}{total_gain_percent:<8.2f}%")
-    print("=" * 70)
+    print("=" * 80)
     
     # Display summary analysis
     print("\n📊 PORTFOLIO ANALYSIS:")
@@ -209,16 +209,6 @@ def main():
         position_values, dollar_gains, percent_gains, portfolio_totals
     )
     
-    # Closing message
-    print("\nThank you for using the Stock Portfolio Summary Calculator!")
-    print("For more advanced portfolio analysis techniques, check out:")
-    print("📘 'Practical Python for Effective Algorithmic Trading'")
-    print("🔗 https://www.amazon.com/dp/B0F3S8FQ7C")
 
 if __name__ == "__main__":
     main()
-
-# This project demonstrates basic Python concepts from Chapter 3 of
-# "Practical Python for Effective Algorithmic Trading" by Kuldeep Singh Rathore.
-# For more advanced algorithmic trading implementations and community support, visit:
-# https://www.skool.com/the-quantitative-elite
