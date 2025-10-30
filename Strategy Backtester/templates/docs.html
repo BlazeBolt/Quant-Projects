@@ -1,0 +1,375 @@
+{% extends "layout.html" %}
+
+{% block title %}Documentation - Trading Strategy Backtester{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-3 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-light">
+                    <h4 class="mb-0">Contents</h4>
+                </div>
+                <div class="card-body p-0">
+                    <nav id="navbar-docs" class="navbar navbar-light">
+                        <nav class="nav nav-pills flex-column w-100">
+                            <a class="nav-link p-3" href="#overview">Overview</a>
+                            <a class="nav-link p-3" href="#strategy">Strategy Explanation</a>
+                            <a class="nav-link p-3" href="#parameters">Strategy Parameters</a>
+                            <a class="nav-link p-3" href="#metrics">Performance Metrics</a>
+                            <a class="nav-link p-3" href="#api">API Reference</a>
+                            <a class="nav-link p-3" href="#advanced">Advanced Usage</a>
+                        </nav>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-9">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <h1 id="overview" class="display-5 mb-4">Documentation</h1>
+                    <p class="lead mb-4">This documentation provides comprehensive information about the Trading Strategy Backtester, its features, and how to use it effectively.</p>
+                    
+                    <hr class="my-4">
+                    
+                    <h2 id="strategy" class="mb-3">Strategy Explanation</h2>
+                    <p>The Moving Average Crossover strategy is a popular trend-following approach used by many traders. It involves two moving averages of different periods:</p>
+                    
+                    <div class="alert alert-light border my-4">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <h5>Short-term Moving Average</h5>
+                                <p>Typically 10-20 days, more responsive to recent price changes</p>
+                                
+                                <h5 class="mt-3">Long-term Moving Average</h5>
+                                <p>Typically 30-200 days, represents the longer-term trend</p>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEhAREBIVFRIWEhkXEhUYGRsRFhUVFxgeFhUWExUaIigiGBolGxgYITEhJykrLi4yFx8zODMsNyktLisBCgoKDg0OGhAQGy8mICIrMCstLi0tLi0tLTU3Li01LS0wNS0tLTMtLy0yMi03Ky0tLS0vLTIuLS0tLS0uLS0tLf/AABEIAJ4BPgMBIgACEQEDEQH/xAAbAAEAAwEBAQEAAAAAAAAAAAAAAQIDBAUGB//EADsQAAICAQIDBgUCAwYHAQAAAAECABEDEiEEMUETIlFhcZEFMlKBsaHBBiNCFENy4fDxM1NigpLR46L/xAAYAQEBAQEBAAAAAAAAAAAAAAAAAgEDBP/EACgRAQEAAgEEAQMDBQAAAAAAAAABAhEhEjFBUQNhcdHB4fATIjJCgf/aAAwDAQACEQMRAD8A/cYiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgJFyYgQGi4WTAi41SZA6wFxcmIEaouOsmBFwWkyDAXFyYgQWi4bkZMCLi5MgmADRcrhyBgGBBB5Ebj7GWB6e8Gy41SZA6wFxcmIEaouOsmBFxqkyD0gLi5MQILRcNyMmBFypybnY8h+t/+peZlqJ9B5+MCUyX0P3BH5l5VHvx+4IloCIiAiIgJFyYgVBk3CyYEXIB5y0gdYC4uTECt7ybjrJgRcgmWkGAuLkxAqx2Mm4bkZMCLmPGvWPIRsdDV06TecnF4g7KjXRRzVkbgrXL1MIz308OTFgbGylRYtkCi9KqWsH1m3BIVy5QxssqMaBG4Gih/wCIneJx/EV0hst6Sq7c96BoEdbJ5S5d3X87p6Jjz6dlyAec48fEl01llROR5MwN1u3yg3tW/rHEcb2IvJbAmkK82Y8lI6MfHlseUy46Vc5Ju9mvGcX2YB0k3fLyF1Mj8SFkaHsEA7AV42b6f7SO14nn2WP/AA9odVeumr8uXnOjhOKGRbFgg0ynZlYc1YeP5sEbGQ59Vyy1Lr7z8tb3k3HWTNd0XIJ5S0g9IC4uTECrHYybhuRkwIuU1UTz5Dp6zSZlqJ9B5+MCUyX0P3BH5l5VMgPK/Yj8y0BERAREQEi5MzyoT8rFT6Ag+oPT0r1gWBmWfi0QgNdnlsTe4HQecwyfEAlKyschukUai3mp5afM1Vi+YvB/iaBh2+JsZHys+hgL5WVY6d+poct4rjn82M43+J9/TsXjsZIAayTQoE/gcvObg85VMCDkqje9gBv4/oPaXHWHTHq/2Li5MQpW95Nx1kwIuQTLSDAXFyYgVY7GTcNyMmBFzkHEKc+kc1xte31FCPwZ2Tj4LGLZqFkuCep/mNQv7QjLe5I6gZzBRkJJ+QWq+d7M35A+/Qy/EMTSKaLXZ8FHzEee4A8yPCWy5FxgCvJFHMmtlUeg9ABZoCVOFd3l5ioxZcXy1lPPkAWV9RPQU4nPxfHknhsoxkoVb5htrdARpFWx0hxy31bc56+HgxqORwNZ5Acl2rbxagBqP2qfP/EBk08NjONWyMhTEhv5tKjXkIPdVANZYEHu0O8VBrivN8uGWtT6a/5YfBvi+PiMuTCpyFkAJw5ceTAgVrrSriwNge9qrUtUCJtwmfD2vEns1QDQiAgIS63rKMvXdRsb2lsH8NdkEZeIzM4BVnOjW/a5EbKzMFuyVvy5ChtPSwfCcYxjGVBGvVTb7+O/M8/eZct1PT8mWU41rnnXrXj+fRPDO4VGW3BQHQT3hsL0uefo3jzHKdmHOrC1N9DsQQfAg7g+Rnn8Pwuh9AOkd9lK90/MporyNaiOXTpNs2M3qYHV/wAzHzrwZDdjfl3uZO03KS3h6cbxy7bkE8py4uMod+q/5i7p56uqffYeM6lcEAggg8iNwfQyLLFpuLkxMGXEZgiO7XpVSxoFjQFmgBZ9BvLYsqsAykMpAKkbgg7ggjmJZp4vDn+yZRiN/wBmzOewPTDlO5wE9EY2ydAdSWP5azZB7Vymrc8+Q6es0mZYAn0Hn4zBZHu+f3BEtKJkB5X7EfmXgIiICIiAmHFZCNNdXUH0Jm84/iaEjGLpe0XV0J32AI5ev+8rHuy9nBw7h8vEnSzsMiqrLQ0KqAjSzED5myWN+ZBngfGsnFdrjTSOydc7ZWxr2uYqmQYyF19xRWTccyAxXcUfp+MwhXxnG4x5G7g7upHVQWCuorlvRsVZ9JTBw2XIpXI6rjLvqCAhm75saye6p8hfmImXT4eTVluOt9/Wubv9fww/hri+24bFkxZtfdoqw1UR/S2wZHqvm5Xynr8Nn1A7UQaYc6I/yojyIM8NfhSaMOdC2J+yS8qUGWl27QHbJj3NqwIUksKNsPYyY2BGRe8wADgbax5eBBJI36kdbG5YycPR8U1jJ6jpuLlcWQMAymwf9fY+UvIdFb3k3HWTAi5BMtIMBcXJiBVjsZNw3IzLJnAXI3MoCSPQXXtUMtk7qcVnOypWtjsSLA2skgeQ/US2DuKdRrdmJ6C2Lc/vODg8JTiCCbY4AWPidVbeW07n77af6VNv5tzC/gn7DezN1y5422237K4WoPlfaxZsfKgsgH7WT5kyeGQk9o4OojYfQvPT6nYnzrmAJD999P8AShBfzbmi/bZj/wBviZ1TbXSRTLlCqzG6AJNAsaAs0oFk+Q3nmfB+HYs3FZ1K5sgAVDv2GLmuLbYMfmci7bayEWetIHWZtoTFyYmDk47Y43HNXF/4W7rX5Ub+wmq8Uh5MD978/wBxNHW9vKYY+Cxg2EUVy2HgB+wlbmk3e+Ga5FdRmQ6TVk0aIHMOOte497pi0v38dJk2Jrk1ixqr51I5N+DYkZjox5FYgWX09L1aiAPPcSVwkOVQ1oRSl8qYtaH/AKe6PT7VKnlEyu9OrBnDXsQw2ZeoP7jwM1ucxXXTL3ci7b8weqOOo/yI6Ga4M+qwRTD5l8PAjxB6H97Eix0XY7GeH/GAZ+GzY00juWxYNyFHuFSCrXRDA7Vc9xj+DOHHwYds5fvKzUVPKqX9NpuNkylqM92aji/h05MWMJxLB8zs7nIF0jJyogdDoABG26kgAT1MGay5PK6G1nukqf1BkcRwoYYxy0tf/wCSCPTeTw7IB3NlrahtzayPIm9+sX2Tq3y2TIDyv2I/MvKJkB5fgj8y8l0IiICIiAnJ8Srsz5Mp9mBnXMONxakKja6/Im43VjMu1cfEqual71UdwKrVW4NeBnoIABQ/EjClADwAHtNJiccdc3u5PhprGF+lmQeiOVX9AJK4yn/D+X6DYA/wH+n03HKqmb8I4J0PS6wwXz1W+/gd9vH2m3C59RdWFOp3HkSdJB6ggfmXfNhPVY9pRLoDf97jrfyYDqdumxquYnWmQMAQbBFgyvEYrors4+U/kHxU9R+4BnPjsfzMYtWvXj2BDf1Femq7BHI87u9WXmKdd7yblMOZX3U349CDtsQdwfIzSS1FyCZaQYC5z8fxGhGYbkCwPEjehOmYZvnx+p/BhOfZjxHxBVUMAWBXVY6LtbHyAa9phk4XVbKaJZ1bYm0Yke4NGX4bgQBxAIFOzAV0UqBXlynU5GNQAL6KOrN6/qT5EyvPDn03L/JTPWruD+YVotXypfM/fkOp8gatkYY0pBvyQG92PieZ33J9TC1jUs53Jtj4k7AKOfgANzy5mMSMzB3FV8i89N8y3TV08hfiYdJFuGxhVC7nnZrmSbYn1Nn7zW4EmSpFyAectIHWAuLkxAre8m46yYGb41PMX9r5TAN/ObnvjWtjvpZ9XtqX3E655/H59GRGomsb0BuSS+MUJWPpGWpNunMhvWnzVRHIMPA/sen3M5fiOYdmcyWHUd01uDe6sOosbjy6EAzuxZAwDDkdx5joZxfE8F7KL7Rgrry1ACyQejaQfWgPCtl55M+MbY5E+MWykrSXpZgCw31gbjdd1HMVvzlRxqZMmXH2wTGpBYqwVnZhsqtzAAFkjfcbijfZlVBjKENj250e6QNmLCwK52TOJcGVXyPjvIrse10kIxonT2RJA1Be6xschRBBpcZqPPn1ax3zzzr7fnTLis2NAzYsxbGv/FVsjZQ633ghYkihZ2NHl4ke5izAkkAgUBurL49COU4sofMoxDEcWLYOW0i0HNEVSefIk1QJq56Baib8B+8nc8OnwzVuu3H09719O30SmQHl+CPzLyiZAeRl5juREQEREBIuTECoMm4WTAi55+fiVx5rY0HQC9+at/8AQe09GUKAnfoZsuk5S3sy4TiNQawRR3B81D7/APl+khjoe/6XIB8n5A/fYeoHjOHPndHzqoHI5N7+UIqigOe4I+09I5EakNHUpNc7XYHbw3HvKs0nHLfHpnnxbh02cD7MPpfy8DzHuDpgzhgeYI2ZTzU+B/8AfIzNCUYKxJU/Ix3P+Fj1PgevXfc8PG5nGQ6V5Miq45bkahk8R3l28zUa3w25Sd3oZ+IVWQNtZ2/G/huwH3mpM8p+Kx5mGNjpJxurA7bkoDoJ2ba6IuWHHv2mTEq9pkVh10KilVNu1GgSTQonbyuZZwn+rJ37eHqXObE4bIxG4CgD1s3PP4z4plxX22MBasvjYuFu61AqDVjmL5b1PQx5AoCoLerIvYXvbHoLJ9enKTJtk+XHO6nhtkdVBJNDr+JyjN3rKkuR3UHNUJ5sTyuv0oWRvQAubVtVf3ld1TyIwryJ5943V1bURO3DhCggdTZJ3JPiSee1D7AS+I6d2eLDvrybv0+lPJf3bmfIbDe5MSNqVBk3AkwIuQDzlpA6wFxcmIFb3k3HWTAi5jnwKxQkbqbHMedelgH7CbyD0hlm+7j4E6FyLsAmRq8Kb+YPTZwPtLHMHOLTv3mbbcUFK8/VhKNgJykf0EK583UgAHwFBfb1k8DwAxtkfmzMd/8ApJ1Ae5MrLV3ft+7n/dePDrY7GUy3QCUDa+QoEahyPSxNG5GTJdLNvNyf2kLYKlqOw8ehsgbeP+jO7UAT6D95pMywBN+A/eE44dPmpTIDy/BH5l5RMgPIy8LIiICIiAkXJiBUESdQhZMCNQkAjeWkDrApkAIbfcrU81F7M4sjkXRUm9hZUKAP+2etKsv5ubKjLHbi4TilzB7WgCAAdjRVXB8QQT+k5+J1qMlEOBmx89m2OM8xsf09Z047XOwIGllLKb+kIp2mnAAlSzVbnVttQIAH4lb1ZUat1PPLDhGJx4/5f92AdZUAggXy1H9J5nAoVz8SgdcR1IQALBBXbTZogAAWBexn0k8v4h8KGXLrLFT2YUFavZtW92GHLYjoJky0n5MMpMbjzq/pp81/EycYxx6MuI43ZlyNo06QmPtRoLa0Gwy22QEWqgadU9L+HuLRseDBnY48nZqOwdexLnSCd7Iz7c9BI3IM7+B+FEY0Gd2ZUG+PYY7G/eoW/oTXlOnjM3D5FbHmCuhFsrrrUjzBFVe3rtzm3Pwn45q9eXHHm8+3aSK+0nUJ4ycBkxjVwmYlN/5OfVlTmbCZD/Mxm9tyyqBQQT0+Cyuy3kx9m90V1Bx6qw5r4WAfISXpl221CNQkxMaqGEnUIEmBGoSARvLSB1gNQjUJMQK2Lk6hHWTAjUJBI2lpB6QFiNQkxAqxFGTqENyMmBGoSmsAn0H7zSZlgCb8B+8CyZAeUtKq4PIy0BERAREQERKnGPAe0CVkynZL9I9o7JfpHtAvIHWV7JfpHtHZL9I9oF4lOyX6R7R2S/SPaBjxHCh2Qm9geW12VNH2nQooASvZL9I9o7JfpHtDNTe15BHKV7JfpHtHZL9I9oavMv7OlEaRRFGhW329B7S3ZL9I9o7JfpHtDLJUJjCrpUUANhNJTsl+ke0dkv0j2hsml4lOyX6R7R2S/SPaBYSZTsl+ke0dkv0j2gXkDrK9kv0j2jsl+ke0C8SnZL9I9o7JfpHtAt1kynZL9I9o7JfpHtAvIPSV7JfpHtHZL9I9oF4lOyX6R7R2S/SPaBZuRkynZL9I9o7JfpHtAvMywBN+A/eT2S/SPaSqAcgBAJkB5GWiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiIH/9k=" alt="Moving Average Crossover" class="img-fluid rounded">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h4 class="mb-3">Trading Rules</h4>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="card h-100 border-success">
+                                <div class="card-header bg-success text-white">
+                                    <h5 class="mb-0">Buy Signal</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p>A buy signal is generated when the short-term moving average crosses <strong>above</strong> the long-term moving average.</p>
+                                    <p class="mb-0 text-muted">This indicates that recent prices are trending higher than the longer-term average, suggesting upward momentum.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="card h-100 border-danger">
+                                <div class="card-header bg-danger text-white">
+                                    <h5 class="mb-0">Sell Signal</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p>A sell signal is generated when the short-term moving average crosses <strong>below</strong> the long-term moving average.</p>
+                                    <p class="mb-0 text-muted">This indicates that recent prices are trending lower than the longer-term average, suggesting downward momentum.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h4 class="mt-4 mb-3">Risk Management: Stop Loss</h4>
+                    <p>The strategy includes an optional stop-loss feature to limit potential losses:</p>
+                    <ul>
+                        <li>When entering a position, a stop-loss level is set at a specified percentage below the entry price</li>
+                        <li>If the price falls to or below this level, the position is automatically sold</li>
+                        <li>This helps protect against significant drawdowns during false signals or trend reversals</li>
+                    </ul>
+                    
+                    <hr class="my-4">
+                    
+                    <h2 id="parameters" class="mb-3">Strategy Parameters</h2>
+                    <p>The backtester allows you to customize the following parameters:</p>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Description</th>
+                                    <th>Default</th>
+                                    <th>Recommended Range</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Number of Days</td>
+                                    <td>Trading days to simulate</td>
+                                    <td>100</td>
+                                    <td>60-1000</td>
+                                </tr>
+                                <tr>
+                                    <td>Starting Price</td>
+                                    <td>Initial price of the simulated stock</td>
+                                    <td>$100</td>
+                                    <td>$10-$1000</td>
+                                </tr>
+                                <tr>
+                                    <td>Price Volatility</td>
+                                    <td>Daily price volatility (standard deviation)</td>
+                                    <td>0.015 (1.5%)</td>
+                                    <td>0.005-0.03</td>
+                                </tr>
+                                <tr>
+                                    <td>MA Type</td>
+                                    <td>Type of moving average calculation</td>
+                                    <td>Simple (SMA)</td>
+                                    <td>Simple or Exponential</td>
+                                </tr>
+                                <tr>
+                                    <td>Short-term MA Period</td>
+                                    <td>Period for short-term moving average</td>
+                                    <td>10 days</td>
+                                    <td>5-50 days</td>
+                                </tr>
+                                <tr>
+                                    <td>Long-term MA Period</td>
+                                    <td>Period for long-term moving average</td>
+                                    <td>30 days</td>
+                                    <td>20-200 days</td>
+                                </tr>
+                                <tr>
+                                    <td>Initial Capital</td>
+                                    <td>Starting investment amount</td>
+                                    <td>$10,000</td>
+                                    <td>$1,000-$1,000,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Stop Loss</td>
+                                    <td>Automatic exit if price falls below percentage</td>
+                                    <td>5%</td>
+                                    <td>0-20% (0 to disable)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="alert alert-info mt-3">
+                        <div class="d-flex">
+                            <div class="me-3">
+                                <i class="fas fa-lightbulb fa-2x"></i>
+                            </div>
+                            <div>
+                                <h5>Parameter Optimization</h5>
+                                <p class="mb-0">The optimal parameters depend on the market conditions and the specific instrument being traded. Experimenting with different combinations can help identify the most effective settings for your trading style.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <hr class="my-4">
+                    
+                    <h2 id="metrics" class="mb-3">Performance Metrics</h2>
+                    <p>The backtester calculates the following performance metrics to help you evaluate your strategy:</p>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header bg-light">
+                                    <h5 class="mb-0">Return Metrics</h5>
+                                </div>
+                                <div class="card-body">
+                                    <dl>
+                                        <dt>Total Return</dt>
+                                        <dd>Percentage gain/loss over the entire period</dd>
+                                        
+                                        <dt>Annualized Return</dt>
+                                        <dd>Return normalized to a yearly rate</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header bg-light">
+                                    <h5 class="mb-0">Risk Metrics</h5>
+                                </div>
+                                <div class="card-body">
+                                    <dl>
+                                        <dt>Maximum Drawdown</dt>
+                                        <dd>Largest percentage drop from a peak to a trough</dd>
+                                        
+                                        <dt>Profit Factor</dt>
+                                        <dd>Gross profit divided by gross loss</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header bg-light">
+                                    <h5 class="mb-0">Trade Metrics</h5>
+                                </div>
+                                <div class="card-body">
+                                    <dl>
+                                        <dt>Total Trades</dt>
+                                        <dd>Number of completed trades</dd>
+                                        
+                                        <dt>Win Rate</dt>
+                                        <dd>Percentage of trades that were profitable</dd>
+                                        
+                                        <dt>Average Win</dt>
+                                        <dd>Average profit on winning trades</dd>
+                                        
+                                        <dt>Average Loss</dt>
+                                        <dd>Average loss on losing trades</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header bg-light">
+                                    <h5 class="mb-0">Visual Analysis</h5>
+                                </div>
+                                <div class="card-body">
+                                    <dl>
+                                        <dt>Price Chart</dt>
+                                        <dd>Price with moving averages and trade markers</dd>
+                                        
+                                        <dt>Equity Curve</dt>
+                                        <dd>Growth of portfolio value over time</dd>
+                                        
+                                        <dt>Drawdown Chart</dt>
+                                        <dd>Visualization of drawdowns throughout the period</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <hr class="my-4">
+                    
+                    <h2 id="api" class="mb-3">API Reference</h2>
+                    <p>The backtester provides a simple API endpoint that can be used programmatically:</p>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header bg-light">
+                            <h5 class="mb-0">POST /api/backtest</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>Run a backtest with custom parameters.</p>
+                            
+                            <h6 class="mt-3">Request Body</h6>
+                            <pre class="bg-light p-3 rounded"><code>{
+  "days": 100,
+  "start_price": 100,
+  "volatility": 0.015,
+  "short_period": 10,
+  "long_period": 30,
+  "initial_capital": 10000,
+  "stop_loss": 5,
+  "ma_type": "sma"  // "sma" or "ema"
+}</code></pre>
+                            
+                            <h6 class="mt-3">Response</h6>
+                            <p>Returns a JSON object containing:</p>
+                            <ul>
+                                <li><code>metrics</code>: Performance metrics</li>
+                                <li><code>trades</code>: Detailed trade history</li>
+                                <li><code>charts</code>: JSON data for Plotly charts</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <hr class="my-4">
+                    
+                    <h2 id="advanced" class="mb-3">Advanced Usage</h2>
+                    <p>The Trading Strategy Backtester can be extended and customized in various ways:</p>
+                    
+                    <div class="accordion" id="advancedUsageAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Using Real Market Data
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#advancedUsageAccordion">
+                                <div class="accordion-body">
+                                    <p>You can modify the application to use real market data instead of simulated data:</p>
+                                    <ol>
+                                        <li>Integrate with market data APIs like Alpha Vantage, Yahoo Finance, or IEX Cloud</li>
+                                        <li>Replace the <code>generate_price_data()</code> function with data fetching from these sources</li>
+                                        <li>Adjust the backtester to handle real market data nuances like gaps, splits, and dividends</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Adding New Strategy Types
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#advancedUsageAccordion">
+                                <div class="accordion-body">
+                                    <p>The current implementation focuses on moving average crossovers, but you can extend it with additional strategies:</p>
+                                    <ul>
+                                        <li>RSI (Relative Strength Index) mean reversion</li>
+                                        <li>MACD (Moving Average Convergence Divergence)</li>
+                                        <li>Bollinger Bands breakout</li>
+                                        <li>Support/resistance levels</li>
+                                    </ul>
+                                    <p>Each strategy would need its own logic implementation in the <code>backtest_strategy()</code> function.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Optimization Techniques
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#advancedUsageAccordion">
+                                <div class="accordion-body">
+                                    <p>To find optimal parameters for different market conditions, you could implement:</p>
+                                    <ul>
+                                        <li>Grid search across parameter combinations</li>
+                                        <li>Walk-forward optimization to prevent overfitting</li>
+                                        <li>Monte Carlo simulations to assess strategy robustness</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Activate scrollspy for documentation navigation
+        const scrollSpy = new bootstrap.ScrollSpy(document.body, {
+            target: '#navbar-docs'
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('#navbar-docs a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 20,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    });
+</script>
+{% endblock %}

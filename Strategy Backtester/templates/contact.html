@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+
+{% block title %}Contact - Trading Strategy Backtester{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <h1 class="display-5 mb-4 text-center fw-bold">Contact Developer</h1>
+                    
+                    <h3 class="mb-3">Send a Message</h3>
+                    <form id="contactForm" action="mailto:ajnkyag0@gmail.com" method="post" enctype="text/plain">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Your Name</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Subject</label>
+                            <select class="form-select" id="subject" required>
+                                <option value="" selected disabled>Select a subject</option>
+                                <option value="question">Question about the backtester</option>
+                                <option value="bug">Report a bug</option>
+                                <option value="feature">Feature request</option>
+                                <option value="book">Question about the book</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea class="form-control" id="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" >Send Message</button>
+                    </form>
+                    
+                    <div id="successMessage" class="alert alert-success mt-4 d-none">
+                        <div class="d-flex">
+                            <div class="me-3">
+                                <i class="fas fa-check-circle fa-2x"></i>
+                            </div>
+                            <div>
+                                <h5>Message Sent!</h5>
+                                <p class="mb-0">Thank you for reaching out. We'll respond to your inquiry as soon as possible.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const contactForm = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // In a real application, you would send the form data to a server here
+            // For demonstration purposes, we'll just show the success message
+            
+            // Clear form
+            contactForm.reset();
+            
+            // Show success message
+            successMessage.classList.remove('d-none');
+            
+            // Scroll to success message
+            successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Hide success message after 5 seconds
+            setTimeout(function() {
+                successMessage.classList.add('d-none');
+            }, 5000);
+        });
+    });
+</script>
+{% endblock %}

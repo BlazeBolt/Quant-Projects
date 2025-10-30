@@ -1,0 +1,111 @@
+{% extends "layout.html" %}
+
+{% block title %}About - Trading Strategy Backtester{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <h1 class="display-5 mb-4">About the Project</h1>
+                    
+                    <p class="lead">Trading Strategy Backtester.</p>
+                    
+                    <p>This project demonstrates how to use Python's control flow features (loops and conditionals) to build a complete backtesting system for a moving average crossover strategy. It illustrates key programming concepts while providing a practical tool for traders to evaluate strategy performance.</p>
+                    
+                    <div class="bg-light p-4 rounded my-4">
+                        <h4 class="mb-3">Key Features</h4>
+                        <ul class="mb-0">
+                            <li>Simulation of market data with configurable parameters</li>
+                            <li>Implementation of a moving average crossover strategy</li>
+                            <li>Support for both Simple and Exponential Moving Averages</li>
+                            <li>Risk management with customizable stop-loss</li>
+                            <li>Comprehensive performance metrics</li>
+                            <li>Interactive data visualization</li>
+                            <li>Trade-by-trade analysis</li>
+                        </ul>
+                    </div>
+                    
+                    <h3 class="mb-3">Moving Average Crossover Strategy</h3>
+                    <p>This backtester implements a classic moving average crossover strategy, one of the most widely used trend-following approaches in financial markets.</p>
+                    
+                    <div class="mb-4">
+                        <h5>How It Works:</h5>
+                        <ol>
+                            <li>Calculate two moving averages of different lengths (e.g., 10-day and 30-day)</li>
+                            <li>Buy when the shorter MA crosses above the longer MA (bullish signal)</li>
+                            <li>Sell when the shorter MA crosses below the longer MA (bearish signal)</li>
+                            <li>Optionally implement a stop-loss to limit downside risk</li>
+                        </ol>
+                        
+                        <p class="mb-0">This approach aims to capture trending movements while filtering out short-term market noise. The strategy can be optimized by adjusting the MA periods and other parameters to suit different market conditions and instruments.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h3 class="mb-3">Technical Implementation</h3>
+                    <p>The Trading Strategy Backtester is built using modern web technologies:</p>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-6 mb-4">
+                            <div class="d-flex align-items-center">
+                                <div class="me-3">
+                                    <img src="https://cdn3.iconfinder.com/data/icons/logos-and-brands-adobe/512/267_Python-512.png" alt="Python" width="48">
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Python</h5>
+                                    <p class="mb-0 text-muted">Core backtesting engine and strategy logic</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="d-flex align-items-center">
+                                <div class="me-3">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" alt="Flask" width="48">
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Flask</h5>
+                                    <p class="mb-0 text-muted">Web framework for API endpoints and routing</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="d-flex align-items-center">
+                                <div class="me-3">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-plain.svg" alt="Bootstrap" width="48">
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Bootstrap</h5>
+                                    <p class="mb-0 text-muted">Responsive layout and UI components</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="d-flex align-items-center">
+                                <div class="me-3">
+                                    <img src="https://plotly.com/all_static/images/icon-dash.png" alt="Plotly" width="48">
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Plotly</h5>
+                                    <p class="mb-0 text-muted">Interactive data visualization</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h4 class="mt-4 mb-3">Get the Source Code</h4>
+                    <p>The complete source code for this project is available on GitHub:</p>
+                    <div class="d-grid gap-2 d-md-block">
+                        <a href="https://github.com/BlazeBolt/Quant-Projects/tree/main/Strategy%20Backtester" class="btn btn-outline-primary" target="_blank">
+                            <i class="fab fa-github me-2"></i>View on GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
