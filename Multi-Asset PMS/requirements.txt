@@ -1,0 +1,9 @@
+flask
+Flask-SQLAlchemy
+SQLAlchemy
+Werkzeug
+python-dotenv
+numpy
+pandas
+plotly
+routes
