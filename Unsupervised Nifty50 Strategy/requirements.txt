@@ -1,0 +1,10 @@
+pandas
+numpy
+yfinance
+pandas_datareader
+pandas_ta
+statsmodels
+matplotlib
+PyPortfolioOpt
+scikit-learn
+requests

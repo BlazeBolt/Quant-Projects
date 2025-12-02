@@ -1,0 +1,2 @@
+model_rmse,model_mae,model_mape,model_dir_acc,baseline_rmse,baseline_dir_acc
+0.0047216743565914624,0.0038466950053505458,100.0,0.05,0.005907769481638911,0.55
